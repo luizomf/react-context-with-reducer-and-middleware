@@ -8,7 +8,7 @@ async function login(action, dispatch) {
 
   if (!email || !password) return dispatch(actions.authFailure());
 
-  const rawResponse = await fetch('http://localhost:3001/tokens/', {
+  const rawResponse = await fetch('https://api2.otaviomiranda.com.br/', {
     headers: {
       'Content-Type': 'application/json',
     },

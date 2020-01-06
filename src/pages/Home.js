@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 export default function Home() {
   useEffect(() => {
     const getData = async () => {
-      const rawResponse = await fetch('http://localhost:3001/', {
+      const rawResponse = await fetch('https://api2.otaviomiranda.com.br/', {
         headers: {
           'Content-Type': 'application/json',
         },
