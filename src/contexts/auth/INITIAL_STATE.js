@@ -1,6 +1,4 @@
 const INITIAL_STATE = {
-  token: '',
-  user: {},
   isLoggedIn: false,
   loginError: false,
   loginSuccess: false,

@@ -14,6 +14,7 @@ async function login(action, dispatch) {
     },
     body: JSON.stringify({ email, password }),
     method: 'POST',
+    credentials: 'include',
   });
 
   if (rawResponse.status === 401) return dispatch(actions.authFailure());
