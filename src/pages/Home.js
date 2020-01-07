@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [logado, setLogado] = useState(null);
+
   useEffect(() => {
     const getData = async () => {
       const rawResponse = await fetch('https://api2.otaviomiranda.com.br/', {
@@ -11,14 +13,14 @@ export default function Home() {
         credentials: 'include',
       });
 
-      if (rawResponse.status === 401) console.log('Não logado');
+      if (rawResponse.status === 401) setLogado(null);
 
-      const response = await rawResponse.json();
-      console.log(response);
+      // const response = await rawResponse.json();
+      setLogado(true);
     };
 
     getData();
   }, []);
 
-  return <h1>Home</h1>;
+  return <h1>Home {logado ? 'LOGADO' : 'Não logado'}</h1>;
 }
