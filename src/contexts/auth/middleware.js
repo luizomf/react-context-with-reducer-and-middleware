@@ -1,5 +1,6 @@
 import * as types from './types';
 import * as actions from './actions';
+import { apiURL } from '../../config/appConfig';
 
 async function login(action, dispatch) {
   dispatch(actions.authRequest());
@@ -8,7 +9,7 @@ async function login(action, dispatch) {
 
   if (!email || !password) return dispatch(actions.authFailure());
 
-  const rawResponse = await fetch('https://api2.otaviomiranda.com.br/tokens/', {
+  const rawResponse = await fetch(`${apiURL}/tokens/`, {
     headers: {
       'Content-Type': 'application/json',
     },
