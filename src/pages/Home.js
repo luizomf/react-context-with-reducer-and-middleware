@@ -13,7 +13,10 @@ export default function Home() {
         credentials: 'include',
       });
 
-      if (rawResponse.status === 401) setLogado(null);
+      if (rawResponse.status === 401) {
+        setLogado(null);
+        return;
+      }
 
       // const response = await rawResponse.json();
       setLogado(true);
