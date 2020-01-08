@@ -2,8 +2,16 @@ import * as types from './types';
 import * as actions from './actions';
 import { apiURL } from '../../config/appConfig';
 
+let controller;
+
 async function login(action, dispatch) {
   dispatch(actions.authRequest());
+
+  if (controller) {
+    controller.abort();
+  }
+
+  controller = new AbortController();
 
   const { email, password } = action.payload;
 
@@ -13,9 +21,13 @@ async function login(action, dispatch) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({
+      email,
+      password,
+    }),
     method: 'POST',
     credentials: 'include',
+    signal: controller.signal,
   });
 
   if (rawResponse.status === 401) return dispatch(actions.authFailure());

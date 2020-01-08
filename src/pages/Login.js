@@ -43,7 +43,7 @@ export default function Login() {
         />
         <br />
         <button type="submit" disabled={isLoading}>
-          Acessar
+          Entrar
         </button>
       </form>
     </div>
