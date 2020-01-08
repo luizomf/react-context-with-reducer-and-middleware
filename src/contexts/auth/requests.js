@@ -1,3 +1,4 @@
+// You can set aditional headers outside this module
 export const adicionalHeaders = {};
 
 export default async function sendRequest({
