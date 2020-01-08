@@ -1,5 +1,6 @@
 import * as types from './types';
 import INITIAL_STATE from './INITIAL_STATE';
+import { adicionalHeaders } from './requests';
 
 export default function authReducer(state, action) {
   switch (action.type) {
@@ -13,6 +14,7 @@ export default function authReducer(state, action) {
     }
 
     case types.AUTH_FAILURE: {
+      delete adicionalHeaders.Authorization;
       return { ...INITIAL_STATE, loginError: true, isLoading: false };
     }
 
