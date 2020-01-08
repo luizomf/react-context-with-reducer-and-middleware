@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../config/appConfig';
+import requests from '../contexts/auth/requests';
 
 export default function Home() {
   const [logado, setLogado] = useState(null);
@@ -12,12 +13,17 @@ export default function Home() {
       setLoading(true);
 
       try {
-        const rawResponse = await fetch(`${apiURL}`, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'GET',
-          credentials: 'include',
+        // const rawResponse = await fetch(`${apiURL}`, {
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   method: 'GET',
+        //   credentials: 'include',
+        //   signal: controller.signal,
+        // });
+
+        const rawResponse = await requests({
+          url: `${apiURL}`,
           signal: controller.signal,
         });
 

@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect, useState } from 'react';
 import t from 'prop-types';
 
 import authReducer from './reducer';
@@ -9,6 +9,7 @@ import { store, getStoredState } from './store';
 export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
+  const [rehydrated, setRehydrated] = useState(false);
   const [state, dispatch] = useReducer(
     authReducer,
     INITIAL_STATE,
@@ -17,11 +18,12 @@ export default function AuthContextProvider({ children }) {
 
   useEffect(() => {
     store(state);
+    setRehydrated(true);
   }, [state]);
 
   return (
     <AuthContext.Provider value={{ state, dispatch: authMiddleware(dispatch) }}>
-      {children}
+      {rehydrated ? children : null}
     </AuthContext.Provider>
   );
 }

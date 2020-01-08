@@ -1,33 +1,22 @@
 import * as types from './types';
 import * as actions from './actions';
 import { apiURL } from '../../config/appConfig';
-
-let controller;
+import requests from './requests';
 
 async function login(action, dispatch) {
   dispatch(actions.authRequest());
-
-  if (controller) {
-    controller.abort();
-  }
-
-  controller = new AbortController();
 
   const { email, password } = action.payload;
 
   if (!email || !password) return dispatch(actions.authFailure());
 
-  const rawResponse = await fetch(`${apiURL}/tokens/`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  const rawResponse = await requests({
+    url: `${apiURL}/tokens/`,
+    method: 'POST',
     body: JSON.stringify({
       email,
       password,
     }),
-    method: 'POST',
-    credentials: 'include',
-    signal: controller.signal,
   });
 
   if (rawResponse.status === 401) return dispatch(actions.authFailure());
